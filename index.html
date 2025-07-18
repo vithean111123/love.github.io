@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Love</title>
+  <link rel="icon" href="https://pluspng.com/img-png/heart-png--3100.png">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    :root {
+      --color: #ff4f81;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffe6f0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100vh;
+    }
+
+    .header {
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff2e63;
+      animation: glow 2s infinite alternate;
+    }
+
+    .typing {
+      font-size: 1.2em;
+      color: #d6336c;
+      border-right: 2px solid #d6336c;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 5s steps(40, end) forwards, blink 0.8s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent }
+      50% { border-color: #d6336c }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 10px #ff4f81; }
+      to { text-shadow: 0 0 10px #fff, 0 0 20px #ff4f81; }
+    }
+
+    .heart-container {
+      position: relative;
+      width: 250px;
+      height: 230px;
+      margin: 40px 0;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      animation: heartbeat 1s infinite ease-in-out;
+      color: var(--color);
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .heart-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      line-height: 1.4;
+      text-shadow: 0 0 5px #ff2e63;
+    }
+
+    .petal {
+      position: fixed;
+      top: -20px;
+      width: 30px;
+      height: 30px;
+      background: url('https://pluspng.com/img-png/heart-png--3100.png') no-repeat center;
+      background-size: contain;
+      pointer-events: none;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>I love you Darling❤️🌹</h1>
+    <div class="typing">Every beat of my heart is for you💕😘</div>
+  </div>
+
+  <div class="heart-container">
+    <svg viewBox="0 0 100 92">
+      <path d="M8.57864 8.57864C20.0168 -2.85955 38.5618 -2.85955 50 8.57864C61.4382 -2.85955 79.9832 -2.85955 91.4214 8.57864C102.86 20.0168 102.86 38.5618 91.4214 50C91.4162 50.0052 91.411 50.0104 91.4058 50.0156L50 91.4213L8.59924 50.0206C8.59237 50.0137 8.58551 50.0069 8.57864 50C-2.85955 38.5618 -2.85955 20.0168 8.57864 8.57864Z" fill="currentColor"/>
+    </svg>
+    <div class="heart-text">
+      My Heart<br>Beats for You
+    </div>
+  </div>
+
+  <audio autoplay loop hidden>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.animationDuration = (3 + Math.random() * 4) + 's';
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 8000);
+    }
+    setInterval(createPetal, 300);
+
+    setTimeout(() => {
+      if (navigator.vibrate) navigator.vibrate(200);
+      Swal.fire({
+        title: "Yes to Contact Me",
+        html: `
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
+          width="80"
+          alt="Facebook Logo"/><br/>
+          Redirecting in <b></b> seconds... Sl B ot Kter😁❤️
+        `,
+        icon: "info",
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: () => {
+          const b = Swal.getHtmlContainer().querySelector("b");
+          const timerInterval = setInterval(() => {
+            b.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval();
+        },
+      }).then((result) => {
+        if (result.isConfirmed || result.dismiss) {
+          window.location.href = "https://web.facebook.com/?ref=homescreenpwa&_rdc=1&_rdr#";
+        }
+      });
+    }, 4000);
+  </script>
+
+</body>
+</html>
